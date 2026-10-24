@@ -8,6 +8,10 @@ portrait.src=mysteryImage;
 portrait.alt='Retro illustration of Sigbjørn with a large question mark';
 button.addEventListener('click',()=>{
   button.disabled=true;
+  const randomByte = new Uint8Array(1);
+  // A random byte has 128 even and 128 odd possible values.
+  crypto.getRandomValues(randomByte);
+  const yes = (randomByte[0] & 1) === 0;
   portrait.src=mysteryImage;
   portrait.alt='Retro illustration of Sigbjørn with a large question mark';
   answer.className='countdown';
@@ -17,7 +21,6 @@ button.addEventListener('click',()=>{
     count--;
     if(count>0){answer.textContent=String(count);return;}
     clearInterval(timer);
-    const yes = Math.random() < 0.5;
     portrait.src=yes?up:down;
     portrait.alt=yes?'Retro illustrated poster of Sigbjørn giving a thumbs up':'Retro illustrated poster of Sigbjørn giving a thumbs down';
     answer.textContent=yes?'Sigbjørn says yes!':'Sigbjørn says no!';
